@@ -15,28 +15,26 @@ function build(file: string) {
 
 function parserDataToInteger(data: string) {
   const list = data.split(", ");
-  const newList = list.map((i) =>
-    convertibleToNumber(i) ? evaluateNumbers(+i) : i
-  );
+  const newList = list.map((i) => handleData(i));
   return newList;
 }
 
+function handleData(data: string) {
+  return convertibleToNumber(data) ? evaluateNumbers(+data) : data;
+}
+
 function convertibleToNumber(data: string) {
-  return +data === NaN ? false : true;
+  return Number.isNaN(+data) ? false : true;
 }
 
 function evaluateNumbers(num: number) {
-  if (num % 3 == 0 && num % 5 == 0) {
-    return "fizzbuzz";
-  }
-  if (num % 3 == 0) {
-    return "fizz";
-  }
-  if (num % 5 == 0) {
-    return "buzz";
-  } else {
-    return num;
-  }
+  return num % 3 == 0 && num % 5 == 0
+    ? "fizzbuzz"
+    : num % 3 == 0
+    ? "fizz"
+    : num % 5 == 0
+    ? "buzz"
+    : num;
 }
 
 console.log(build(process.argv[2]));
