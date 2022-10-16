@@ -37,4 +37,11 @@ function evaluateNumbers(num: number) {
     : num;
 }
 
-console.log(build(process.argv[2]));
+function start() {
+  const response = build(process.argv[2]);
+  response.status === "ok"
+    ? console.log(response.data?.join(", "))
+    : console.log(response.message);
+}
+
+start();
