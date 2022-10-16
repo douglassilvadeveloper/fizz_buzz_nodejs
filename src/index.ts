@@ -3,7 +3,7 @@ import { readFileSync } from "fs";
 function build(file: string) {
   try {
     const data = readFileSync(file, { encoding: "utf8" });
-    const newData = parserDataToInteger(data);
+    const newData = dataToInteger(data);
     return { status: "ok", data: newData };
   } catch (err) {
     return {
@@ -13,7 +13,7 @@ function build(file: string) {
   }
 }
 
-function parserDataToInteger(data: string) {
+function dataToInteger(data: string) {
   const list = data.split(", ");
   const newList = list.map((i) => handleData(i));
   return newList;
